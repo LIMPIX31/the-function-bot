@@ -1,0 +1,10 @@
+{
+	"name": "@fn/roles-assignment",
+	"main": "src/index.ts",
+	"type": "module",
+	"dependencies": {
+		"@fn/client": "workspace:^",
+		"@fn/helpers": "workspace:^",
+		"discord.js": "^14.11.0"
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"name": "@fn/helpers",
+	"type": "module",
+	"main": "src/index.ts",
+	"dependencies": {
+		"@fn/client": "workspace:^"
+	}
+}
