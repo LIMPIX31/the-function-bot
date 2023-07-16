@@ -131,6 +131,15 @@ function failedToAssign(interaction: StringSelectMenuInteraction) {
 	})
 }
 
+function alreadyHave(interaction: StringSelectMenuInteraction, roleId: string) {
+	return interaction.reply({
+		ephemeral: true,
+		embeds: [
+			new EmbedBuilder().setColor('Orange').setTitle('Role already assigned').setDescription(mentionRole(roleId)),
+		],
+	})
+}
+
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (!interaction.isStringSelectMenu()) {
 		return
@@ -149,6 +158,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
 				if (!roleId) {
 					return
 				}
+				if (member.roles.cache.has(roleId)) {
+					await alreadyHave(interaction, roleId)
+					break
+				}
 				try {
 					await member.roles.remove(Object.values(allowedRolesIds.equipment))
 					await member.roles.add(roleId)
@@ -163,6 +176,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
 				const [roleId] = values
 				if (!roleId) {
 					return
+				}
+				if (member.roles.cache.has(roleId)) {
+					await alreadyHave(interaction, roleId)
+					break
 				}
 				try {
 					await member.roles.remove(Object.values(allowedRolesIds.stack))
