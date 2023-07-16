@@ -1,0 +1,16 @@
+services:
+  yarn:
+    image: node:19
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    entrypoint: yarn
+
+  bot:
+    image: node:19
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    entrypoint: yarn workspace @fn/client start
+    depends_on:
+      - yarn
