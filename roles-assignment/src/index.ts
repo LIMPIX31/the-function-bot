@@ -83,36 +83,38 @@ const channel = await client.channels.fetch('1130075654818381834')
 if (channel && channel.isTextBased()) {
 	const message = await channel.messages.fetch('1130096931843084329')
 
-	const row1 = new ActionRowBuilder().addComponents(equipmentRolesSelect)
-	const row2 = new ActionRowBuilder().addComponents(stackRolesSelect)
+	await message.delete()
 
-	await message.edit({
-		embeds: [
-			new EmbedBuilder()
-				.setColor('#ff3c00')
-				.addFields(
-					{
-						name: 'Equipment',
-						value: `
-**Laptop** - ${mentionRole(allowedRolesIds.equipment.laptop)}
-**Desktop** - ${mentionRole(allowedRolesIds.equipment.desktop)}
-					`.trim(),
-						inline: true,
-					},
-					{
-						name: 'Stack',
-						value: `
-**Frontend** - ${mentionRole(allowedRolesIds.stack.frontend)}
-**Backend** - ${mentionRole(allowedRolesIds.stack.backend)}
-**Fullstack** - ${mentionRole(allowedRolesIds.stack.fullstack)}
-					`.trim(),
-						inline: true,
-					},
-				)
-				.setTitle('Roles'),
-		],
-		components: [row1 as any, row2],
-	})
+// 	const row1 = new ActionRowBuilder().addComponents(equipmentRolesSelect)
+// 	const row2 = new ActionRowBuilder().addComponents(stackRolesSelect)
+//
+// 	await message.edit({
+// 		embeds: [
+// 			new EmbedBuilder()
+// 				.setColor('#ff3c00')
+// 				.addFields(
+// 					{
+// 						name: 'Equipment',
+// 						value: `
+// **Laptop** - ${mentionRole(allowedRolesIds.equipment.laptop)}
+// **Desktop** - ${mentionRole(allowedRolesIds.equipment.desktop)}
+// 					`.trim(),
+// 						inline: true,
+// 					},
+// 					{
+// 						name: 'Stack',
+// 						value: `
+// **Frontend** - ${mentionRole(allowedRolesIds.stack.frontend)}
+// **Backend** - ${mentionRole(allowedRolesIds.stack.backend)}
+// **Fullstack** - ${mentionRole(allowedRolesIds.stack.fullstack)}
+// 					`.trim(),
+// 						inline: true,
+// 					},
+// 				)
+// 				.setTitle('Roles'),
+// 		],
+// 		components: [row1 as any, row2],
+// 	})
 }
 
 function successfullyAsigned(interaction: StringSelectMenuInteraction, roleId: string) {
